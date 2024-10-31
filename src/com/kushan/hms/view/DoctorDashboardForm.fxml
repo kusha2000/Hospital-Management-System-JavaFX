@@ -30,5 +30,10 @@
          </font>
       </JFXButton>
       <Separator layoutX="32.0" layoutY="110.0" prefHeight="20.0" prefWidth="1137.0" />
+      <JFXButton layoutX="134.0" layoutY="264.0" onAction="#navigateToPatientManagement" prefHeight="114.0" prefWidth="371.0" style="-fx-background-color: #012E6A;" text="Patient Management" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

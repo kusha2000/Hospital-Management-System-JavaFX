@@ -47,16 +47,16 @@ public class SignupFormController {
         }
         Database.userTable.add(new UserDto(txtFirstName.getText(),txtLastName.getText(),email,txtPassword.getText(),rBtnDoctor.isSelected()?AccountType.DOCTOR:AccountType.PATIENT));
         new Alert(Alert.AlertType.CONFIRMATION,"Welcome!").show();
-        setUi();
+        setUi("LoginForm");
     }
 
     public void alreadyHaveAnAccountOnAction(ActionEvent actionEvent) throws IOException {
-        setUi();
+        setUi("LoginForm");
     }
 
-    private void setUi() throws IOException {
+    private void setUi(String location) throws IOException {
         Stage stage=(Stage) registerContext.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/LoginForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
         stage.centerOnScreen();
     }
 

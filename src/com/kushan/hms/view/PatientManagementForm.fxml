@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="patientContext" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kushan.hms.controller.PatientManagementFormController">
+<children>
+    <Label layoutX="86.0" layoutY="31.0" text="Patient Management" textFill="#ff6600">
+        <font>
+            <Font name="System Bold" size="25.0" />
+        </font>
+    </Label>
+    <Separator layoutX="35.0" layoutY="88.0" prefHeight="4.0" prefWidth="1130.0" />
+    <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="28.0" onAction="#backToHomeOnAction" prefHeight="43.0" prefWidth="51.0" style="-fx-background-color: #012E6A;" text="&lt;-" textFill="WHITE">
+        <cursor>
+            <Cursor fx:constant="HAND" />
+        </cursor>
+    </JFXButton>
+    <TextField fx:id="txtSearch" layoutX="77.0" layoutY="125.0" prefHeight="43.0" prefWidth="396.0" promptText="Search here">
+        <font>
+            <Font name="System Bold" size="23.0" />
+        </font>
+    </TextField>
+    <TableView fx:id="tblPatients" layoutX="77.0" layoutY="225.0" prefHeight="489.0" prefWidth="1082.0">
+        <columns>
+            <TableColumn fx:id="colNic" prefWidth="104.0" text="NIC" />
+            <TableColumn fx:id="colFirstName" prefWidth="98.0" text="First Name" />
+            <TableColumn fx:id="colLastName" prefWidth="110.0" text="Last Name" />
+            <TableColumn fx:id="colDob" prefWidth="110.0" text="DOB" />
+            <TableColumn fx:id="colGender" prefWidth="82.0" text="Gender" />
+            <TableColumn fx:id="colAddress" prefWidth="244.0" text="Address" />
+            <TableColumn fx:id="colAge" prefWidth="81.0" text="Age" />
+            <TableColumn fx:id="colEmail" prefWidth="252.0" text="Email" />
+        </columns>
+    </TableView>
+</children>
+</AnchorPane>

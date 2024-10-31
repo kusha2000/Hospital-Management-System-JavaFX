@@ -25,12 +25,10 @@ public class LoginFormController {
     public AnchorPane loginContext;
 
     public void createAnAccountOnAction(ActionEvent actionEvent) throws IOException {
-        Stage stage=(Stage) loginContext.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SignUpForm.fxml"))));
-        stage.centerOnScreen();
+        setUi("SignUpForm");
     }
 
-    public void signinOnAction(ActionEvent actionEvent) {
+    public void signinOnAction(ActionEvent actionEvent) throws IOException {
         String email=txtEmail.getText();
         String password=txtPassword.getText();
         AccountType accountType=rBtnDoctor.isSelected()?AccountType.DOCTOR:AccountType.PATIENT;
@@ -40,7 +38,7 @@ public class LoginFormController {
                 if(dto.getPassword().trim().toLowerCase().equals(password)){
                     if(dto.getAccountType().equals(accountType)){
                         new Alert(Alert.AlertType.CONFIRMATION,"Success!").show();
-                        return;
+                        setUi("DoctorDashboardForm");
                     }else{
                         new Alert(Alert.AlertType.WARNING,String.format("We can't find your %s Account",accountType.name())).show();
                         return;
@@ -54,5 +52,10 @@ public class LoginFormController {
             new Alert(Alert.AlertType.WARNING,String.format("We can't find an email (%s)",email)).show();
 
         }
+    }
+    private void setUi(String location) throws IOException {
+        Stage stage=(Stage) loginContext.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
+        stage.centerOnScreen();
     }
 }
