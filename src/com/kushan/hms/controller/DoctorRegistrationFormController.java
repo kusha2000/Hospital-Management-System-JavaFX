@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.kushan.hms.db.Database;
 import com.kushan.hms.dto.DoctorDto;
-import com.kushan.hms.dto.UserDto;
+import com.kushan.hms.dto.User;
 import com.kushan.hms.enums.GenderType;
 import com.kushan.hms.util.Cookie;
 import javafx.event.ActionEvent;
@@ -41,7 +41,7 @@ public class DoctorRegistrationFormController {
         });
     }
     private void loadUserData(){
-        UserDto selectedUser = Cookie.selectedUser;
+        User selectedUser = Cookie.selectedUser;
         txtFirstName.setText(selectedUser.getFirstName());
         txtLastName.setText(selectedUser.getLastName());
         txtEmail.setText(selectedUser.getEmail());

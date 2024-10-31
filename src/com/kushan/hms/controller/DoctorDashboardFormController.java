@@ -2,7 +2,6 @@ package com.kushan.hms.controller;
 
 import com.kushan.hms.db.Database;
 import com.kushan.hms.dto.DoctorDto;
-import com.kushan.hms.dto.UserDto;
 import com.kushan.hms.util.Cookie;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 

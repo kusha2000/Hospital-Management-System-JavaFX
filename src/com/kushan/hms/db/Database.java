@@ -2,22 +2,21 @@ package com.kushan.hms.db;
 
 import com.kushan.hms.dto.DoctorDto;
 import com.kushan.hms.dto.PatientDto;
-import com.kushan.hms.dto.UserDto;
+import com.kushan.hms.dto.User;
 import com.kushan.hms.enums.AccountType;
 import com.kushan.hms.enums.GenderType;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Database {
-    public static ArrayList<UserDto> userTable= new ArrayList();
+    public static ArrayList<User> userTable= new ArrayList();
     public static ArrayList<DoctorDto> doctorTable= new ArrayList();
     public static ArrayList<PatientDto> patientTable= new ArrayList();
 
     static{
-        userTable.add(new UserDto("Kushan","Andarawewa","kushan@gmail.com","1234", AccountType.PATIENT));
-        userTable.add(new UserDto("Nimal","Perera","nimal@gmail.com","1234", AccountType.DOCTOR));
+        userTable.add(new User("Kushan","Andarawewa","kushan@gmail.com","1234", AccountType.PATIENT));
+        userTable.add(new User("Nimal","Perera","nimal@gmail.com","1234", AccountType.DOCTOR));
 
 
         doctorTable.add(new DoctorDto("Nimal","Perera","9876","+94715628223","nimal@gmail.com","Sample 1","Colombo", GenderType.MALE));

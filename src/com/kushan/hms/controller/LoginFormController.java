@@ -3,9 +3,12 @@ package com.kushan.hms.controller;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.kushan.hms.db.DBConnection;
 import com.kushan.hms.db.Database;
-import com.kushan.hms.dto.UserDto;
+import com.kushan.hms.dto.User;
 import com.kushan.hms.enums.AccountType;
+import com.kushan.hms.util.CrudUtil;
+import com.kushan.hms.util.PasswordConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class LoginFormController {
     public JFXTextField txtEmail;
@@ -29,28 +33,72 @@ public class LoginFormController {
     }
 
     public void signinOnAction(ActionEvent actionEvent) throws IOException {
+        //=============================
+        //For JavaFX manual Data Store
+        //=============================
+
+//        String email=txtEmail.getText();
+//        String password=txtPassword.getText();
+//        AccountType accountType=rBtnDoctor.isSelected()?AccountType.DOCTOR:AccountType.PATIENT;
+//
+//        for(User dto: Database.userTable){
+//            if(dto.getEmail().trim().toLowerCase().equals(email)){
+//                if(dto.getPassword().trim().toLowerCase().equals(password)){
+//                    if(dto.getAccountType().equals(accountType)){
+//                        new Alert(Alert.AlertType.CONFIRMATION,"Success!").show();
+//                        setUi("DoctorDashboardForm");
+//                    }else{
+//                        new Alert(Alert.AlertType.WARNING,String.format("We can't find your %s Account",accountType.name())).show();
+//                        return;
+//                    }
+//                }else{
+//                    new Alert(Alert.AlertType.WARNING,"Your Password is incorrect").show();
+//                    return;
+//                }
+//
+//            }
+//            new Alert(Alert.AlertType.WARNING,String.format("We can't find an email (%s)",email)).show();
+//        }
+
+        //=============================
+        //For JavaFX using JDBC
+        //=============================
+
         String email=txtEmail.getText();
         String password=txtPassword.getText();
         AccountType accountType=rBtnDoctor.isSelected()?AccountType.DOCTOR:AccountType.PATIENT;
+        try {
+            //JDBC
+            // 1 driver load => dependency
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+            // 2 Create a Connection
+            //Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitalMS_javafx","root","");
+            // 3 write a SQL
+           // String sql="SELECT * FROM user WHERE email=? AND account_type=?";
+            // 4 Create Statement
+//            PreparedStatement pstm= DBConnection.getInstance().getConnection().prepareStatement(sql);
+//            pstm.setString(1,email);
+//            pstm.setString(2,accountType.name());
+//            ResultSet resultSet=pstm.executeQuery();
 
-        for(UserDto dto: Database.userTable){
-            if(dto.getEmail().trim().toLowerCase().equals(email)){
-                if(dto.getPassword().trim().toLowerCase().equals(password)){
-                    if(dto.getAccountType().equals(accountType)){
-                        new Alert(Alert.AlertType.CONFIRMATION,"Success!").show();
+            ResultSet resultSet= CrudUtil.execute("SELECT * FROM user WHERE email=? AND account_type=?",email,accountType.name());
+            if(resultSet.next()){
+                if(new PasswordConfig().decrypt(password,resultSet.getString("password"))){
+                    if(accountType.equals(AccountType.DOCTOR)){
                         setUi("DoctorDashboardForm");
                     }else{
-                        new Alert(Alert.AlertType.WARNING,String.format("We can't find your %s Account",accountType.name())).show();
-                        return;
+                        setUi("PatientDashboardForm");
                     }
                 }else{
-                    new Alert(Alert.AlertType.WARNING,"Your Password is incorrect").show();
-                    return;
+                    new Alert(Alert.AlertType.WARNING,"Your Password is Wrong").show();
+
                 }
+            }else{
+                new Alert(Alert.AlertType.WARNING,String.format("We can't find an email (%s)",email)).show();
 
             }
-            new Alert(Alert.AlertType.WARNING,String.format("We can't find an email (%s)",email)).show();
-
+        }catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
         }
     }
     private void setUi(String location) throws IOException {
