@@ -4,5 +4,5 @@ import com.kushan.hms.db.Database;
 import com.kushan.hms.dto.User;
 
 public class Cookie {
-    public static User selectedUser= Database.userTable.get(1);
+    public static User selectedUser;
 }

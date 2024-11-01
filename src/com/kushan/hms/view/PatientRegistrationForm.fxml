@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -10,11 +11,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="doctorRegistrationContext" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kushan.hms.controller.DoctorRegistrationFormController">
+<AnchorPane fx:id="patientRegistrationContext" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kushan.hms.controller.PatientRegistrationFormController">
    <children>
-      <Label layoutX="102.0" layoutY="60.0" text="Doctor Registration" textFill="#ff5900">
+      <Label layoutX="102.0" layoutY="60.0" text="Patient Registration" textFill="#ff5900">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Bold" size="31.0" />
          </font>
       </Label>
       <Separator layoutX="42.0" layoutY="120.0" prefHeight="20.0" prefWidth="1137.0" />
@@ -43,11 +44,6 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtSpecializations" layoutX="58.0" layoutY="375.0" prefHeight="50.0" prefWidth="441.0" promptText="Specializations">
-         <font>
-            <Font name="System Bold" size="23.0" />
-         </font>
-      </TextField>
       <JFXRadioButton fx:id="rBtnMale" layoutX="600.0" layoutY="381.0" prefHeight="39.0" prefWidth="162.0" selected="true" text="Male">
          <font>
             <Font name="System Bold" size="27.0" />
@@ -71,5 +67,6 @@
             <Font size="21.0" />
          </font>
       </JFXButton>
+      <JFXDatePicker fx:id="txtDob" layoutX="67.0" layoutY="369.0" prefHeight="64.0" prefWidth="444.0" promptText="Date of Birth" />
    </children>
 </AnchorPane>

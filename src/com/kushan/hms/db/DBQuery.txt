@@ -1,0 +1,103 @@
+CREATE SCHEMA IF NOT EXISTS `medex` ;
+USE `medex` ;
+
+CREATE TABLE IF NOT EXISTS `medex`.`user` (
+  `user_id` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `email` VARCHAR(100) NULL,
+  `password` VARCHAR(700) NULL,
+  `account_type` ENUM('DOCTOR', 'PATIENT') NULL,
+  PRIMARY KEY (`user_id`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `medex`.`doctor` (
+  `doctor_id` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `contact` VARCHAR(45) NULL,
+  `email` VARCHAR(100) NULL,
+  `specialization` VARCHAR(45) NULL,
+  `address` VARCHAR(45) NULL,
+  `gender` ENUM('MALE', 'FEMALE') NULL,
+  PRIMARY KEY (`doctor_id`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `medex`.`patient` (
+  `patient_id` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `email` VARCHAR(100) NULL,
+  `contact` VARCHAR(45) NULL,
+  `nic` VARCHAR(45) NULL,
+  `address` VARCHAR(45) NULL,
+  `dob` DATE NULL,
+  `gender` ENUM('MALE', 'FEMALE') NULL,
+  PRIMARY KEY (`patient_id`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `medex`.`appointment` (
+  `appointment_id` VARCHAR(45) NOT NULL,
+  `date` DATE NULL,
+  `time` VARCHAR(15) NULL,
+  `amount` DOUBLE NULL,
+  `check_state` TINYINT NULL,
+  `patient_id` VARCHAR(45) NOT NULL,
+  `doctor_id` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`appointment_id`),
+   CONSTRAINT     FOREIGN KEY (`patient_id`)
+    REFERENCES `medex`.`patient` (`patient_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT    FOREIGN KEY (`doctor_id`)
+    REFERENCES `medex`.`doctor` (`doctor_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `medex`.`prescription` (
+  `prescription_id` VARCHAR(45) NOT NULL,
+  `date` DATE NULL,
+  `description` VARCHAR(250) NULL,
+  `file` LONGBLOB NULL,
+  `appointment_id` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`prescription_id`),
+  CONSTRAINT
+    FOREIGN KEY (`appointment_id`)
+    REFERENCES `medex`.`appointment` (`appointment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `medex`.`patient_document` (
+  `doc_id` VARCHAR(45) NOT NULL,
+  `date` DATE NULL,
+  `file` LONGBLOB NULL,
+  `appointment_id` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`doc_id`, `appointment_id`),
+    CONSTRAINT `fk_patient_document_appointment1`
+    FOREIGN KEY (`appointment_id`)
+    REFERENCES `medex`.`appointment` (`appointment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `medex`.`payment` (
+  `payment_id` VARCHAR(45) NOT NULL,
+  `date` DATE NULL,
+  `amount` DOUBLE NULL,
+  `file` LONGBLOB NULL,
+  `appointment_id` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`payment_id`),
+  CONSTRAINT `fk_payment_appointment1`
+    FOREIGN KEY (`appointment_id`)
+    REFERENCES `medex`.`appointment` (`appointment_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;

@@ -84,8 +84,12 @@ public class SignupFormController {
 //            pstm.setString(6,user.getAccountType().name());
 //            // 5 Execute
 //            int isSaved=pstm.executeUpdate();
-
-            boolean isSaved= CrudUtil.execute("INSERT INTO user VALUES (?,?,?,?,?,?)",new IdGenerator().generateId(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getPassword(),user.getAccountType().name());
+            String id = new IdGenerator().generateId("SELECT user_id FROM user ORDER BY user_id DESC 1","U");
+            boolean isSaved = CrudUtil.execute(
+                    "INSERT INTO user VALUES (?,?,?,?,?,?)",id
+                    ,user.getFirstName(),user.getLastName(),user.getEmail(),
+                    user.getPassword(),user.getAccountType().name()
+            );
             if(isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Saved!").show();
                 setUi("LoginForm");

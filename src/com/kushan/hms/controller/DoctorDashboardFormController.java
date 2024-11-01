@@ -30,7 +30,6 @@ public class DoctorDashboardFormController {
     public void initialize() throws IOException {
         //checkUser();
         initializeData();
-        checkDoctorData();
     }
 
 
@@ -89,7 +88,7 @@ public class DoctorDashboardFormController {
     }
 
     public void navigateToAppointmentsManagementPage(ActionEvent actionEvent) throws IOException {
-        setUi("AppointmentsForm");
+        setUi("AppoinmentForm");
     }
 
     public void navigateToPatientManagement(ActionEvent actionEvent) throws IOException {
