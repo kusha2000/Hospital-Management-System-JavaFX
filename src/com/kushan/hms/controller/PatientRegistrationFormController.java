@@ -46,7 +46,7 @@ public class PatientRegistrationFormController {
     private String generatePatientId() throws SQLException, ClassNotFoundException {
         ResultSet result= CrudUtil.execute("SELECT patient_id FROM patient ORDER BY patient_id DESC LIMIT 1");
         if(result.next()) {
-            int lastId=Integer.parseInt(result.getString("patient_id").split("_")[1]);
+            int lastId=Integer.parseInt(result.getString("patient_id").split("-")[1]);
             lastId++;
             return "P-"+lastId;
         }

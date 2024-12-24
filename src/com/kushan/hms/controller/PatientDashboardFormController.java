@@ -22,4 +22,7 @@ public class PatientDashboardFormController {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+location+".fxml"))));
         stage.centerOnScreen();
     }
+    public void logoutAction(ActionEvent actionEvent) throws IOException {
+        setUi("LoginForm");
+    }
 }

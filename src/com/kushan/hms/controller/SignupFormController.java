@@ -9,6 +9,7 @@ import com.kushan.hms.dto.User;
 import com.kushan.hms.enums.AccountType;
 import com.kushan.hms.util.CrudUtil;
 import com.kushan.hms.util.IdGenerator;
+import com.kushan.hms.util.IdGeneratorRegister;
 import com.kushan.hms.util.PasswordConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -84,7 +85,7 @@ public class SignupFormController {
 //            pstm.setString(6,user.getAccountType().name());
 //            // 5 Execute
 //            int isSaved=pstm.executeUpdate();
-            String id = new IdGenerator().generateId("SELECT user_id FROM user ORDER BY user_id DESC 1","U");
+            String id = new IdGeneratorRegister().generateId(user.getAccountType().name());
             boolean isSaved = CrudUtil.execute(
                     "INSERT INTO user VALUES (?,?,?,?,?,?)",id
                     ,user.getFirstName(),user.getLastName(),user.getEmail(),

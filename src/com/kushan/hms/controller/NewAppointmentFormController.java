@@ -98,6 +98,7 @@ public class NewAppointmentFormController {
         String id = new IdGenerator().generateId(
                 "SELECT appointment_id FROM appointment ORDER BY appointment_id DESC LIMIT 1",
                 "A"
+
         );
 
         try {

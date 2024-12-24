@@ -9,6 +9,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -26,6 +27,7 @@ public class DoctorDashboardFormController {
     public AnchorPane doctorDashboardContext;
     public Label lblDate;
     public Label lblTime;
+    public Button logoutBtn;
 
     public void initialize() throws IOException {
         //checkUser();
@@ -93,5 +95,9 @@ public class DoctorDashboardFormController {
 
     public void navigateToPatientManagement(ActionEvent actionEvent) throws IOException {
         setUi("PatientManagementForm");
+    }
+
+    public void logoutAction(ActionEvent actionEvent) throws IOException {
+        setUi("LoginForm");
     }
 }

@@ -125,11 +125,12 @@ public class AppointmentsFormController {
         }
     }
 
-    public void backToHomeOnAction(ActionEvent actionEvent) {
+    public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("DoctorDashboardForm");
     }
 
     public void searchData(ActionEvent actionEvent) throws IOException {
-        setUi("DoctorDashboardForm");
+
     }
 
     private void setUi(String location) throws IOException {

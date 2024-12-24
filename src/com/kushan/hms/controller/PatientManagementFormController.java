@@ -6,17 +6,22 @@ import com.kushan.hms.view.tm.PatientTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.logging.SimpleFormatter;
 
 public class PatientManagementFormController {
+    public AnchorPane patientContext;
     public TableView<PatientTm> tblPatients;
     public TableColumn colNic;
     public TableColumn colFirstName;
@@ -27,7 +32,6 @@ public class PatientManagementFormController {
     public TableColumn colAge;
     public TableColumn colEmail;
     public TextField txtSearch;
-    public AnchorPane patientContext;
     public Label lblDate;
 
     public void initialize() {
@@ -58,6 +62,13 @@ public class PatientManagementFormController {
         tblPatients.setItems(tmList);
     }
 
-    public void backToHomeOnAction(ActionEvent actionEvent) {
+    public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("DoctorDashboardForm");
+    }
+    private void setUi(String location) throws IOException {
+        Stage stage = (Stage) patientContext.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.
+                load(getClass().getResource("../view/" + location + ".fxml"))));
+        stage.centerOnScreen();
     }
 }
